@@ -1,0 +1,27 @@
+[
+  {
+    "id": "project-1",
+    "title": "Portfolio Website",
+    "description": "A modern portfolio website showcasing my projects and skills",
+    "tech_stack": ["React", "TypeScript", "Tailwind CSS", "FastAPI"],
+    "github_url": "https://github.com/user/portfolio",
+    "live_url": "https://portfolio.example.com"
+  },
+  {
+    "id": "project-2",
+    "title": "E-Commerce Platform",
+    "description": "Full-stack e-commerce platform with payment integration",
+    "tech_stack": ["Python", "Django", "PostgreSQL", "Stripe API"],
+    "github_url": "https://github.com/user/ecommerce",
+    "live_url": null
+  },
+  {
+    "id": "project-3",
+    "title": "Task Management App",
+    "description": "Collaborative task management application with real-time updates",
+    "tech_stack": ["Node.js", "Express", "MongoDB", "Socket.io"],
+    "github_url": "https://github.com/user/task-manager",
+    "live_url": "https://tasks.example.com"
+  }
+]
+

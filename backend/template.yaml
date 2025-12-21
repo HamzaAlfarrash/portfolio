@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Portfolio FastAPI Backend - Serverless Application
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Runtime: python3.10
+    Environment:
+      Variables:
+        PYTHONPATH: /var/task
+
+Resources:
+  PortfolioApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.main.handler
+      Runtime: python3.10
+      MemorySize: 512
+      Timeout: 30
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        HealthEvent:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: GET
+
+Outputs:
+  PortfolioApi:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  PortfolioApiFunction:
+    Description: "Portfolio Lambda Function ARN"
+    Value: !GetAtt PortfolioApiFunction.Arn
+  PortfolioApiFunctionIamRole:
+    Description: "Implicit IAM Role created for Portfolio function"
+    Value: !GetAtt PortfolioApiFunctionRole.Arn
+
