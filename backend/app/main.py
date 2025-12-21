@@ -6,6 +6,7 @@ from app.core import setup_cors, settings
 from app.api.v1.router import api_router
 from app.api.projects import router as projects_router
 from app.api.contact import router as contact_router
+from app.api.blogs import router as blogs_router
 
 
 def create_app() -> FastAPI:
@@ -23,6 +24,7 @@ def create_app() -> FastAPI:
     app.include_router(api_router, prefix="/api/v1")
     app.include_router(projects_router, prefix="/projects", tags=["projects"])
     app.include_router(contact_router, prefix="/contact", tags=["contact"])
+    app.include_router(blogs_router, prefix="/blogs", tags=["blogs"])
     
     return app
 
