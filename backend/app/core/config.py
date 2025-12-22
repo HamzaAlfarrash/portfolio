@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     cors_origins: list[str] = [
         "http://localhost:3000",
         "http://localhost:5173",
+        "http://localhost:8080",
     ]
     
     # Regex pattern for CloudFront and S3 origins (used if cors_origin_regex is enabled)

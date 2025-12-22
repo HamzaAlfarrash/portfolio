@@ -1,0 +1,17 @@
+# Frontend dependencies
+frontend/node_modules/
+
+# Frontend build artifacts
+frontend/dist/
+frontend/.vite/
+
+# Frontend logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Editor / OS files (if not already ignored elsewhere)
+.DS_Store
+
+
