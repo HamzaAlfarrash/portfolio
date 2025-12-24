@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Briefcase, Calendar } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const companyLogos: Record<string, string> = {
   'Amazon Web Services (AWS)': 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
-  'Leap Event Technology': 'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1455112230/jlnqfqjpk0f0kh9o2pcd.png',
+  'Leap Event Technology': '/logos/leap-event-technology.png',
 };
 
 const experiences = [
@@ -120,6 +121,7 @@ function CompanyLogo({ company, isVisible, fromLeft, delay }: CompanyLogoProps) 
 export function ExperienceSection() {
   const [visibleLogos, setVisibleLogos] = useState<boolean[]>(new Array(experiences.length).fill(false));
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -153,11 +155,18 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="section-padding bg-card/30">
       <div className="section-container">
-        <div className="text-center mb-16">
-          <span className="text-sm font-mono text-primary mb-4 block opacity-0 animate-fade-in">
+        <div 
+          ref={headerRef}
+          className="text-center mb-16 transition-all duration-700 ease-out"
+          style={{
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? 'translateY(0)' : 'translateY(30px)',
+          }}
+        >
+          <span className="text-sm font-mono text-primary mb-4 block">
             02. Experience
           </span>
-          <h2 className="heading-lg opacity-0 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <h2 className="heading-lg">
             Professional <span className="text-gradient">Journey</span>
           </h2>
         </div>

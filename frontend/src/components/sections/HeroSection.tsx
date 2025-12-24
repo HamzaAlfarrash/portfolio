@@ -2,48 +2,56 @@ import { ArrowDown, Cloud, Server, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import profilePhoto from '@/assets/profile-photo.png';
 import { useParallax } from '@/hooks/useParallax';
+import { useTilt } from '@/hooks/useTilt';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 export function HeroSection() {
   const parallaxSlow = useParallax(0.15);
   const parallaxMedium = useParallax(0.25);
   const parallaxFast = useParallax(0.35);
+  const { tilt, handleMouseMove, handleMouseLeave } = useTilt(15);
+  
+  const tagline = "Building scalable cloud infrastructure and elegant software solutions. Transforming complex challenges into simple, reliable systems.";
+  const { displayedText, isComplete } = useTypewriter(tagline, 30, 800);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 grid-pattern opacity-50" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-28">
+      {/* Hero-specific gradient fade for content readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
       
       {/* Floating elements with parallax */}
       <div 
-        className="absolute top-1/4 left-1/4 opacity-20 animate-float"
+        className="absolute top-1/4 left-1/4 opacity-15 animate-float"
         style={{ transform: `translateY(${parallaxSlow}px)` }}
       >
         <Cloud className="w-16 h-16 text-primary" />
       </div>
       <div 
-        className="absolute top-1/3 right-1/4 opacity-20 animate-float"
+        className="absolute top-1/3 right-1/4 opacity-15 animate-float"
         style={{ animationDelay: '1s', transform: `translateY(${parallaxMedium}px)` }}
       >
         <Server className="w-12 h-12 text-accent" />
       </div>
       <div 
-        className="absolute bottom-1/3 left-1/3 opacity-20 animate-float"
+        className="absolute bottom-1/3 left-1/3 opacity-15 animate-float"
         style={{ animationDelay: '2s', transform: `translateY(${parallaxFast}px)` }}
       >
         <Code2 className="w-14 h-14 text-primary" />
       </div>
 
-      {/* Glow effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl animate-pulse-glow" />
-
       <div className="section-container relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Floating Profile Photo with Glow */}
-          <div 
-            className="relative inline-block mb-8 opacity-0 animate-fade-in"
-            style={{ transform: `translateY(${parallaxSlow * 0.5}px)` }}
-          >
+          <div className="flex justify-center mb-8">
+            <div 
+              className="relative opacity-0 animate-fade-in"
+              style={{ 
+                transform: `translateY(${parallaxSlow * 0.5}px) perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(${tilt.scale})`,
+                transition: 'transform 0.15s ease-out'
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
             {/* Outer glow ring */}
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 rounded-full blur-2xl animate-pulse opacity-60" />
             {/* Inner glow */}
@@ -58,13 +66,9 @@ export function HeroSection() {
                 className="w-full h-full object-cover object-center scale-110"
               />
             </div>
+            </div>
           </div>
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '100ms' }}>
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm font-mono text-primary">Available for new opportunities</span>
-          </div>
 
           {/* Heading */}
           <h1 className="heading-xl mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
@@ -72,10 +76,10 @@ export function HeroSection() {
             <span className="text-gradient-animated">Hamza Alfarrash</span>
           </h1>
 
-          {/* Tagline */}
-          <p className="body-lg max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
-            Building scalable cloud infrastructure and elegant software solutions. 
-            Transforming complex challenges into simple, reliable systems.
+          {/* Tagline with typewriter effect */}
+          <p className="body-lg max-w-2xl mx-auto mb-10 min-h-[4rem] opacity-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
+            {displayedText}
+            {!isComplete && <span className="inline-block w-0.5 h-5 bg-primary ml-1 animate-pulse" />}
           </p>
 
           {/* CTAs */}
@@ -86,18 +90,6 @@ export function HeroSection() {
             <Button variant="hero-outline" size="xl" asChild>
               <a href="#contact">Get in Touch</a>
             </Button>
-          </div>
-
-          {/* Tech stack */}
-          <div className="mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <p className="text-sm text-muted-foreground mb-4">Technologies I work with</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {['AWS', 'Azure', 'Kubernetes', 'Terraform', 'Python', 'Go', 'TypeScript'].map(tech => (
-                <span key={tech} className="px-4 py-2 text-sm font-mono bg-secondary rounded-lg text-muted-foreground">
-                  {tech}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
 

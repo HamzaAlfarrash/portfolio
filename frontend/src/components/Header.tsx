@@ -8,15 +8,33 @@ const navLinks = [
   { href: '/#about', label: 'About' },
   { href: '/#experience', label: 'Experience' },
   { href: '/#projects', label: 'Projects' },
+  { href: '/#certifications', label: 'Certifications' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    // Check localStorage or default to dark
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored === 'dark';
+      return document.documentElement.classList.contains('dark');
+    }
+    return true;
+  });
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    // Apply theme on mount
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +45,10 @@ export function Header() {
   }, []);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
     document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
   };
 
   const handleNavClick = (href: string) => {
@@ -54,7 +74,7 @@ export function Header() {
             to="/"
             className="font-mono text-lg font-semibold tracking-tight hover:text-primary transition-colors"
           >
-            &lt;dev /&gt;
+            &lt;hamza /&gt;
           </Link>
 
           {/* Desktop Navigation */}

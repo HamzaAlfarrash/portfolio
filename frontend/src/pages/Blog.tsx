@@ -17,7 +17,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Header />
       <main className="pt-32 pb-20">
         <div className="section-container">

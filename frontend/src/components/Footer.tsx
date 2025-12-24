@@ -14,7 +14,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link to="/" className="font-mono text-lg font-semibold tracking-tight">
-              &lt;dev /&gt;
+              &lt;hamza /&gt;
             </Link>
             <p className="mt-4 text-muted-foreground max-w-md">
               Cloud and software engineer passionate about building scalable infrastructure 
@@ -38,7 +38,7 @@ export function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:hello@example.com"
+                href="mailto:hamza.amr2003@gmail.com"
                 className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
               >
                 <Mail className="w-5 h-5" />
