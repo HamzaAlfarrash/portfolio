@@ -14,4 +14,10 @@ frontend/pnpm-debug.log*
 # Editor / OS files (if not already ignored elsewhere)
 .DS_Store
 
+# Environment files (keep .env.example)
+.env
+.env.local
+.env.*.local
+!.env.example
+
 

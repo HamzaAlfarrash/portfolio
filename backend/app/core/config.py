@@ -17,8 +17,14 @@ class Settings(BaseSettings):
         "http://localhost:8080",
     ]
     
-    # Regex pattern for CloudFront and S3 origins (used if cors_origin_regex is enabled)
-    cors_origin_regex: str = r"https://.*\.cloudfront\.net|https://.*\.s3\..*\.amazonaws\.com"
+    # Regex pattern for CloudFront, S3, Vercel, Netlify, and other common hosting origins
+    cors_origin_regex: str = (
+        r"https://.*\.cloudfront\.net|"
+        r"https://.*\.s3\..*\.amazonaws\.com|"
+        r"https://.*\.vercel\.app|"
+        r"https://.*\.netlify\.app|"
+        r"https://.*\.pages\.dev"
+    )
     
     class Config:
         """Pydantic config."""
