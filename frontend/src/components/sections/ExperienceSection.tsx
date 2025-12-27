@@ -11,35 +11,20 @@ const experiences = [
   {
     title: 'Associate Cloud Consultant',
     company: 'Amazon Web Services (AWS)',
-    period: '2026 - Present',
-    description: 'Leading cloud infrastructure initiatives and architecting scalable solutions for enterprise clients.',
-    achievements: [
-      'Reduced cloud costs by 40% through infrastructure optimization',
-      'Implemented zero-downtime deployment strategies',
-      'Led migration of legacy systems to Kubernetes',
-    ],
+    period: 'Starting 2026',
+    description: 'Returning full-time to AWS after a successful internship, joining the Application Development team as an Associate Cloud Consultant.',
   },
   {
-    title: 'Cloud Consultant Intern',
+    title: 'Cloud Consultant Intern – Application Development',
     company: 'Amazon Web Services (AWS)',
-    period: '2025 - 2025',
-    description: 'Built and maintained cloud infrastructure supporting millions of daily active users.',
-    achievements: [
-      'Designed and implemented multi-region disaster recovery',
-      'Automated infrastructure provisioning with Terraform',
-      'Reduced deployment time from hours to minutes',
-    ],
+    period: 'May 2025 – August 2025',
+    description: 'Designed and developed CloudAsset, a serverless digital asset management platform that reduced manual processing time by 95%, saving internal AWS teams 20+ hours per week.',
   },
   {
-    title: 'QA Analyst Intern',
+    title: 'QA Analyst Intern, Contractor',
     company: 'Leap Event Technology',
-    period: '2024 - 2025',
-    description: 'Developed full-stack applications and contributed to DevOps practices.',
-    achievements: [
-      'Built microservices architecture from monolith',
-      'Implemented CI/CD pipelines with GitHub Actions',
-      'Mentored junior developers on best practices',
-    ],
+    period: 'January 2024 – March 2025',
+    description: 'Contributed to quality assurance and test automation for a web conventions platform, improving code quality and deployment efficiency.',
   },
 ];
 
@@ -73,15 +58,7 @@ function ExperienceCard({ exp, index }: ExperienceCardProps) {
         <Calendar className="w-4 h-4" />
         <span>{exp.period}</span>
       </div>
-      <p className="text-muted-foreground mb-4">{exp.description}</p>
-      <ul className="space-y-2">
-        {exp.achievements.map((achievement) => (
-          <li key={achievement} className="flex items-start gap-2 text-sm">
-            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 shrink-0" />
-            <span className="text-muted-foreground">{achievement}</span>
-          </li>
-        ))}
-      </ul>
+      <p className="text-muted-foreground">{exp.description}</p>
     </div>
   );
 }
