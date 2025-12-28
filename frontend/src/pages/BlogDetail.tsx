@@ -3,6 +3,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { getBlogBySlug } from '@/lib/api';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 const BlogDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -33,7 +34,26 @@ const BlogDetailPage = () => {
                   </span>
                 )}
               </div>
-              <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div className="space-y-6 text-foreground/90">
+                <ReactMarkdown
+                  components={{
+                    h2: ({ children }) => <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">{children}</h2>,
+                    h3: ({ children }) => <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">{children}</h3>,
+                    p: ({ children }) => <p className="text-foreground/80 leading-relaxed mb-4">{children}</p>,
+                    ul: ({ children }) => <ul className="list-disc list-inside space-y-2 mb-4 ml-4">{children}</ul>,
+                    ol: ({ children }) => <ol className="list-decimal list-inside space-y-2 mb-4 ml-4">{children}</ol>,
+                    li: ({ children }) => <li className="text-foreground/80">{children}</li>,
+                    strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
+                    em: ({ children }) => <em className="italic text-foreground/70">{children}</em>,
+                    a: ({ href, children }) => <a href={href} className="text-primary hover:underline">{children}</a>,
+                    code: ({ children }) => <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>,
+                    pre: ({ children }) => <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">{children}</pre>,
+                    blockquote: ({ children }) => <blockquote className="border-l-4 border-primary pl-4 italic text-foreground/70 my-4">{children}</blockquote>,
+                  }}
+                >
+                  {post.content}
+                </ReactMarkdown>
+              </div>
             </article>
           )}
         </div>

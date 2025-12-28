@@ -32,25 +32,45 @@ export const blogPosts: BlogDetail[] = [
     date: "2025-01-15",
     readTime: "5 min read",
     tags: ["AWS", "Serverless", "Cloud"],
-    content: `
-      <h2>Introduction</h2>
-      <p>Serverless architecture has revolutionized how we build and deploy applications. In this post, I'll share my experience building serverless systems at AWS and key lessons learned.</p>
-      
-      <h2>Why Serverless?</h2>
-      <p>Serverless computing allows you to build applications without thinking about servers. AWS Lambda automatically scales your code in response to each trigger, and you only pay for the compute time you consume.</p>
-      
-      <h2>Key Components</h2>
-      <ul>
-        <li><strong>AWS Lambda</strong> - Run code without provisioning servers</li>
-        <li><strong>API Gateway</strong> - Create RESTful APIs at any scale</li>
-        <li><strong>DynamoDB</strong> - Fast and flexible NoSQL database</li>
-        <li><strong>S3</strong> - Object storage for any amount of data</li>
-      </ul>
-      
-      <h2>Getting Started</h2>
-      <p>The best way to start is with AWS CDK (Cloud Development Kit), which lets you define your infrastructure using familiar programming languages like TypeScript.</p>
-      
-      <p><em>Stay tuned for more deep dives into cloud architecture patterns!</em></p>
+    content: `## Introduction
+
+Serverless architecture has revolutionized how we build and deploy applications. In this post, I'll share my experience building serverless systems at AWS and key lessons learned.
+
+## Why Serverless?
+
+Serverless computing allows you to build applications without thinking about servers. AWS Lambda automatically scales your code in response to each trigger, and you only pay for the compute time you consume.
+
+## Key Components
+
+- **AWS Lambda** - Run code without provisioning servers
+- **API Gateway** - Create RESTful APIs at any scale
+- **DynamoDB** - Fast and flexible NoSQL database
+- **S3** - Object storage for any amount of data
+
+## Getting Started
+
+The best way to start is with AWS CDK (Cloud Development Kit), which lets you define your infrastructure using familiar programming languages like TypeScript.
+
+Here's a simple example of creating a Lambda function with CDK:
+
+\`\`\`typescript
+import * as cdk from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+
+export class MyStack extends cdk.Stack {
+  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    new lambda.Function(this, 'MyFunction', {
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'index.handler',
+      code: lambda.Code.fromAsset('lambda'),
+    });
+  }
+}
+\`\`\`
+
+*Stay tuned for more deep dives into cloud architecture patterns!*
     `,
   },
 ];
