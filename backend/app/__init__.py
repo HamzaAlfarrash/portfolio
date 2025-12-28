@@ -1,2 +1,0 @@
-"""Portfolio FastAPI Backend Application."""
-

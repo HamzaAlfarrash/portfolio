@@ -1,30 +1,13 @@
-import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { submitContactForm } from "@/lib/api";
-import { useToast } from "@/hooks/use-toast";
-import { Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
+
+const EMAIL = "hamza.amr2003@gmail.com";
 
 const Contact = () => {
-  const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const { toast } = useToast();
+  const mailtoLink = `mailto:${EMAIL}?subject=${encodeURIComponent("Let's Connect")}`;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    const result = await submitContactForm(form);
-    toast({
-      title: result.success ? "Success" : "Error",
-      description: result.message,
-      variant: result.success ? "default" : "destructive",
-    });
-    if (result.success) setForm({ name: "", email: "", subject: "", message: "" });
-    setLoading(false);
-  };
 
   return (
     <div className="min-h-screen">
@@ -37,15 +20,17 @@ const Contact = () => {
             </h1>
             <p className="body-lg max-w-2xl mx-auto">Have a project in mind? Let's discuss how I can help.</p>
           </div>
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <div className="space-y-8">
+          <div className="max-w-xl mx-auto">
+            <div className="space-y-8 p-8 rounded-xl bg-card border border-border">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-primary/10">
                   <Mail className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">hamza.amr2003@gmail.com</p>
+                  <a href={`mailto:${EMAIL}`} className="text-muted-foreground hover:text-primary transition-colors">
+                    {EMAIL}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -57,47 +42,13 @@ const Contact = () => {
                   <p className="text-muted-foreground">Toronto, CA</p>
                 </div>
               </div>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-6 p-8 rounded-xl bg-card border border-border">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Input
-                  placeholder="Name"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  required
-                />
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  required
-                />
-              </div>
-              <Input
-                placeholder="Subject"
-                value={form.subject}
-                onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                required
-              />
-              <Textarea
-                placeholder="Your message..."
-                rows={5}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                required
-              />
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </>
-                )}
+              <Button className="w-full" size="lg" asChild>
+                <a href={mailtoLink}>
+                  <Send className="w-4 h-4" />
+                  Send Email
+                </a>
               </Button>
-            </form>
+            </div>
           </div>
         </div>
       </main>
