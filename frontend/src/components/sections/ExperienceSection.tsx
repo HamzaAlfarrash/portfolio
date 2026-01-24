@@ -12,7 +12,7 @@ const experiences = [
     title: 'Associate Cloud Consultant',
     company: 'Amazon Web Services (AWS)',
     period: 'Starting 2026',
-    description: 'Returning full-time to AWS after a successful internship, joining the Application Development team as an Associate Cloud Consultant.',
+    description: 'Returning full-time to AWS after a successful internship, joining the A2C team as an Associate Cloud Consultant.',
   },
   {
     title: 'Cloud Consultant Intern – Application Development',
