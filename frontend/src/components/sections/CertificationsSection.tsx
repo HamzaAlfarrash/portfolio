@@ -26,6 +26,11 @@ const certifications = [
     badge: "/badges/aws-ml-engineer-associate.png",
     verifyUrl: "https://cp.certmetrics.com/amazon/en/public/verify/credential/4356cdf558c94ba2a992c2ce13a4fa26",
   },
+  {
+    name: "AWS Certified Machine Learning – Specialty",
+    badge: "/badges/aws-ml-specialty.png",
+    verifyUrl: "",
+  },
 ];
 
 export function CertificationsSection() {
@@ -50,14 +55,9 @@ export function CertificationsSection() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-          {certifications.map((cert, index) => (
-            <ScrollReveal key={cert.name} delay={(index + 1) * 100}>
-              <a
-                href={cert.verifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center group cursor-pointer"
-              >
+          {certifications.map((cert, index) => {
+            const content = (
+              <>
                 <div className="relative mb-3">
                   <img
                     src={cert.badge}
@@ -69,13 +69,30 @@ export function CertificationsSection() {
                 <p className="text-xs md:text-sm text-center text-muted-foreground max-w-[120px] group-hover:text-foreground transition-colors duration-300">
                   {cert.name.replace("AWS Certified ", "").replace(" – Associate", "")}
                 </p>
-              </a>
-            </ScrollReveal>
-          ))}
+              </>
+            );
+
+            return (
+              <ScrollReveal key={cert.name} delay={(index + 1) * 100}>
+                {cert.verifyUrl ? (
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center group cursor-pointer"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div className="flex flex-col items-center group cursor-pointer">
+                    {content}
+                  </div>
+                )}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-
-
